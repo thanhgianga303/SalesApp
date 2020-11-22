@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SalesAppAPI.Data;
+using SalesAppAPI.Data.Repository;
+using SalesAppAPI.Models.IRepository;
 using TourApi.Mapping;
 
 namespace SalesAppAPI
@@ -51,6 +53,17 @@ namespace SalesAppAPI
 
                 options.UseLazyLoadingProxies();
             });
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ICatalogRepository, CatalogRepository>();
+            services.AddScoped<IComboRepository, ComboRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IDeliveryNoteRepository, DeliveryNoteRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
+            services.AddScoped<IStorageRepository, StorageRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
