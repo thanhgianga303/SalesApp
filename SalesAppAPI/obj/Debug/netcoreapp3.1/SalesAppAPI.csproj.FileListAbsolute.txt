@@ -65,3 +65,5 @@ E:\SalesApp\SalesAppAPI\bin\Debug\netcoreapp3.1\Humanizer.dll
 E:\SalesApp\SalesAppAPI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 E:\SalesApp\SalesAppAPI\obj\Debug\netcoreapp3.1\staticwebassets\SalesAppAPI.StaticWebAssets.Manifest.cache
 E:\SalesApp\SalesAppAPI\obj\Debug\netcoreapp3.1\staticwebassets\SalesAppAPI.StaticWebAssets.xml
+E:\SalesApp\SalesAppAPI\bin\Debug\netcoreapp3.1\AutoMapper.dll
+E:\SalesApp\SalesAppAPI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

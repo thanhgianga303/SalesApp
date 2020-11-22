@@ -63,6 +63,7 @@ namespace SalesAppAPI
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
             services.AddScoped<IStorageRepository, StorageRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }
 
@@ -74,11 +75,8 @@ namespace SalesAppAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors(MyAllowSpecificOrigins);
-            app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
