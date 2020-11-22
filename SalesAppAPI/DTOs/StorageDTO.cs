@@ -5,7 +5,7 @@ using SalesAppAPI.Models;
 
 namespace SalesAppAPI.DTOs
 {
-    public class Storage
+    public class StorageDTO
     {
         public string StorageId { get; set; }
         public string ProductId { get; set; }
@@ -13,6 +13,5 @@ namespace SalesAppAPI.DTOs
         public DateTime ImportDate { get; set; }
         public DateTime ExportDate { get; set; }
         public Product Product { get; set; }
-
     }
 }

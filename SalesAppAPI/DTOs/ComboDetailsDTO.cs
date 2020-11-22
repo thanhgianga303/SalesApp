@@ -5,7 +5,7 @@ using SalesAppAPI.Models;
 
 namespace SalesAppAPI.DTOs
 {
-    public class ComboDetails
+    public class ComboDetailsDTO
     {
         public int ComboDetailsId { get; set; }
         public string ComboId { get; set; }

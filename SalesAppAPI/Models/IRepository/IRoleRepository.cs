@@ -5,7 +5,7 @@ using SalesAppAPI.Models;
 
 namespace SalesAppAPI.Models.IRepository
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IRoleRepository : IRepository<Role>
     {
     }
 }
