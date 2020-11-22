@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Giang\\OneDrive\\Documents\\SalesAppAPI\\SalesAppAPI.csproj": {}
+    "E:\\SalesApp\\SalesAppAPI\\SalesAppAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Giang\\OneDrive\\Documents\\SalesAppAPI\\SalesAppAPI.csproj": {
+    "E:\\SalesApp\\SalesAppAPI\\SalesAppAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Giang\\OneDrive\\Documents\\SalesAppAPI\\SalesAppAPI.csproj",
+        "projectUniqueName": "E:\\SalesApp\\SalesAppAPI\\SalesAppAPI.csproj",
         "projectName": "SalesAppAPI",
-        "projectPath": "C:\\Users\\Giang\\OneDrive\\Documents\\SalesAppAPI\\SalesAppAPI.csproj",
+        "projectPath": "E:\\SalesApp\\SalesAppAPI\\SalesAppAPI.csproj",
         "packagesPath": "C:\\Users\\Giang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Giang\\OneDrive\\Documents\\SalesAppAPI\\obj\\",
+        "outputPath": "E:\\SalesApp\\SalesAppAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -38,6 +38,34 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
