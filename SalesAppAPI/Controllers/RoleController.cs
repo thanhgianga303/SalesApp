@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SalesAppAPI.DTOs;
 using SalesAppAPI.Models;
 using SalesAppAPI.Models.IRepository;
@@ -28,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(rolesDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<RoleDTO>>> GetBy(int id)
+        public async Task<ActionResult<IEnumerable<RoleDTO>>> GetBy(string id)
         {
             var role = await _unitOfWork.Roles.GetBy(id);
             var roleDTO = _mapper.Map<Role, RoleDTO>(role);
@@ -41,6 +42,57 @@ namespace SalesAppAPI.Controller
             await _unitOfWork.Roles.Add(role);
             await _unitOfWork.Complete();
             return CreatedAtAction(nameof(GetBy), new { id = role.RoleId }, role);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, RoleDTO roleDto)
+        {
+            if (roleDto.RoleId != id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var role = _mapper.Map<RoleDTO, Role>(roleDto);
+                await _unitOfWork.Roles.Update(id, role);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await RoleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+
+            }
+            return NoContent();
+        }
+        private async Task<bool> RoleExists(string id)
+        {
+            var role = await _unitOfWork.Roles.GetBy(id);
+            if (role != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            if (await RoleExists(id))
+            {
+                await _unitOfWork.Roles.Delete(id);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
