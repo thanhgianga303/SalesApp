@@ -18,9 +18,8 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Account", b =>
                 {
-                    b.Property<int>("AccountId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("AccountId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
@@ -105,8 +104,8 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("CustomerId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("AccountId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
@@ -281,8 +280,8 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("StaffId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("AccountId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
@@ -443,9 +442,7 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Account", "Account")
                         .WithOne("Staff")
-                        .HasForeignKey("SalesAppAPI.Models.Staff", "AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalesAppAPI.Models.Staff", "AccountId");
 
                     b.HasOne("SalesAppAPI.Models.Role", null)
                         .WithMany("StaffList")

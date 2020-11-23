@@ -9,7 +9,7 @@ namespace SalesAppAPI.Models
         [Required]
         public string CustomerId { get; set; }
         public bool isNew { get; set; }
-        public int? AccountId { get; set; }
+        public string AccountId { get; set; } = null;
         public virtual Account Account { get; set; }
     }
 }

@@ -40,19 +40,18 @@ namespace SalesAppAPI.Controller
         {
             var role = _mapper.Map<RoleDTO, Role>(roleDTO);
             await _unitOfWork.Roles.Add(role);
-            await _unitOfWork.Complete();
             return CreatedAtAction(nameof(GetBy), new { id = role.RoleId }, role);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, RoleDTO roleDto)
+        public async Task<IActionResult> Update(string id, RoleDTO roleDTO)
         {
-            if (roleDto.RoleId != id)
+            if (roleDTO.RoleId != id)
             {
                 return BadRequest();
             }
             try
             {
-                var role = _mapper.Map<RoleDTO, Role>(roleDto);
+                var role = _mapper.Map<RoleDTO, Role>(roleDTO);
                 await _unitOfWork.Roles.Update(id, role);
             }
             catch (DbUpdateConcurrencyException)
@@ -82,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRole(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (await RoleExists(id))
             {

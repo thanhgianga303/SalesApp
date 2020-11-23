@@ -75,8 +75,7 @@ namespace SalesAppAPI.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    AccountId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountId = table.Column<string>(type: "TEXT", nullable: false),
                     RoleId = table.Column<string>(type: "TEXT", nullable: true),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
                     Password = table.Column<string>(type: "TEXT", nullable: true)
@@ -145,7 +144,7 @@ namespace SalesAppAPI.Migrations
                 {
                     CustomerId = table.Column<string>(type: "TEXT", nullable: false),
                     isNew = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccountId = table.Column<int>(type: "INTEGER", nullable: true),
+                    AccountId = table.Column<string>(type: "TEXT", nullable: true),
                     RoleId = table.Column<string>(type: "TEXT", nullable: true),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
                     Password = table.Column<string>(type: "TEXT", nullable: true),
@@ -177,7 +176,7 @@ namespace SalesAppAPI.Migrations
                 columns: table => new
                 {
                     StaffId = table.Column<string>(type: "TEXT", nullable: false),
-                    AccountId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountId = table.Column<string>(type: "TEXT", nullable: true),
                     RoleId = table.Column<string>(type: "TEXT", nullable: true),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
                     Password = table.Column<string>(type: "TEXT", nullable: true),
@@ -195,7 +194,7 @@ namespace SalesAppAPI.Migrations
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "AccountId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Staff_Roles_RoleId",
                         column: x => x.RoleId,

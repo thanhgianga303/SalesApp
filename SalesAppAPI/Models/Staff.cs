@@ -8,7 +8,7 @@ namespace SalesAppAPI.Models
         [Key]
         [Required]
         public string StaffId { get; set; }
-        public int AccountId { get; set; }
+        public string AccountId { get; set; }
         public virtual Account Account { get; set; }
     }
 }
