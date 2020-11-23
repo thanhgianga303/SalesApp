@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(DeliveryNotesDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<DeliveryNoteDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<DeliveryNoteDTO>>> GetBy(int id)
         {
             var DeliveryNote = await _unitOfWork.DeliveryNotes.GetBy(id);
             var DeliveryNoteDTO = _mapper.Map<DeliveryNote, DeliveryNoteDTO>(DeliveryNote);
@@ -43,9 +43,9 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = DeliveryNote.DeliveryNoteId }, DeliveryNote);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, DeliveryNoteDTO DeliveryNoteDTO)
+        public async Task<IActionResult> Update(int id, DeliveryNoteDTO DeliveryNoteDTO)
         {
-            if (DeliveryNoteDTO.DeliveryNoteId.ToString() != id)
+            if (DeliveryNoteDTO.DeliveryNoteId != id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> DeliveryNoteExists(string id)
+        private async Task<bool> DeliveryNoteExists(int id)
         {
             var DeliveryNote = await _unitOfWork.DeliveryNotes.GetBy(id);
             if (DeliveryNote != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await DeliveryNoteExists(id))
             {

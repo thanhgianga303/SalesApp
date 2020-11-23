@@ -8,9 +8,9 @@ namespace SalesAppAPI.Models
         [Key]
         [Required]
         public int InvoiceDetailsId { get; set; }
-        public string InvoiceId { get; set; }
-        public string ComboId { get; set; } = null!;
-        public string ProductId { get; set; } = null!;
+        public int InvoiceId { get; set; }
+        public int? ComboId { get; set; }
+        public int? ProductId { get; set; }
         public virtual Combo Combo { get; set; }
         public virtual Product Product { get; set; }
         public virtual Invoice Invoice { get; set; }

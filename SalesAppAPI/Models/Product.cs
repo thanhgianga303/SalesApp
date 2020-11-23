@@ -7,8 +7,9 @@ namespace SalesAppAPI.Models
     {
         [Key]
         [Required]
-        public string ProductId { get; set; }
-        public string CatalogId { get; set; }
+        public int ProductId { get; set; }
+        public int CatalogId { get; set; }
+        public string ProductCode { get; set; }
         public string ProductName { get; set; }
         public string Details { get; set; }
         public int Amount { get; set; }

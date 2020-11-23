@@ -16,7 +16,7 @@ namespace SalesAppAPI.Infrastructure
         {
             return await _context.Set<T>().ToListAsync();
         }
-        public async Task<T> GetBy(string id)
+        public async Task<T> GetBy(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
@@ -25,12 +25,12 @@ namespace SalesAppAPI.Infrastructure
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
-        public async Task Update(string id, T entity)
+        public async Task Update(int id, T entity)
         {
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
         }
-        public async Task Delete(string id)
+        public async Task Delete(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
             _context.Set<T>().Remove(entity);

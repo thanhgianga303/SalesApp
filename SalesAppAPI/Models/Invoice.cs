@@ -8,9 +8,10 @@ namespace SalesAppAPI.Models
     {
         [Key]
         [Required]
-        public string InvoiceId { get; set; }
-        public string CustomerID { get; set; }
-        public string StaffID { get; set; }
+        public int InvoiceId { get; set; }
+        public int CustomerID { get; set; }
+        public int StaffID { get; set; }
+        public string InvoiceCode { get; set; }
         public string InvoiceName { get; set; }
         public DateTime CreateDate { get; set; }
         public decimal TotalMoney { get; set; }

@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(StaffsDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<StaffDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<StaffDTO>>> GetBy(int id)
         {
             var Staff = await _unitOfWork.Staff.GetBy(id);
             var StaffDTO = _mapper.Map<Staff, StaffDTO>(Staff);
@@ -43,9 +43,9 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = Staff.StaffId }, Staff);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, StaffDTO StaffDTO)
+        public async Task<IActionResult> Update(int id, StaffDTO StaffDTO)
         {
-            if (StaffDTO.StaffId.ToString() != id)
+            if (StaffDTO.StaffId != id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> StaffExists(string id)
+        private async Task<bool> StaffExists(int id)
         {
             var Staff = await _unitOfWork.Staff.GetBy(id);
             if (Staff != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await StaffExists(id))
             {

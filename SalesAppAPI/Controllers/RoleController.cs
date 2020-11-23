@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(rolesDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<RoleDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<RoleDTO>>> GetBy(int id)
         {
             var role = await _unitOfWork.Roles.GetBy(id);
             var roleDTO = _mapper.Map<Role, RoleDTO>(role);
@@ -43,7 +43,7 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = role.RoleId }, role);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, RoleDTO roleDTO)
+        public async Task<IActionResult> Update(int id, RoleDTO roleDTO)
         {
             if (roleDTO.RoleId != id)
             {
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> RoleExists(string id)
+        private async Task<bool> RoleExists(int id)
         {
             var role = await _unitOfWork.Roles.GetBy(id);
             if (role != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await RoleExists(id))
             {

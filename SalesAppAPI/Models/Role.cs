@@ -7,7 +7,8 @@ namespace SalesAppAPI.Models
     {
         [Key]
         [Required]
-        public string RoleId { get; set; }
+        public int RoleId { get; set; }
+        public string RoleCode { get; set; }
         public string RoleName { get; set; }
         public string Description { get; set; }
         public virtual List<Staff> StaffList { get; set; }

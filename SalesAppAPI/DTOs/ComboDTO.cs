@@ -7,7 +7,8 @@ namespace SalesAppAPI.DTOs
 {
     public class ComboDTO
     {
-        public string ComboId { get; set; }
+        public int ComboId { get; set; }
+        public string ComboCode { get; set; }
         public string ComboName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

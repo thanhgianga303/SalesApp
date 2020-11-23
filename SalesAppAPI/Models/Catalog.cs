@@ -7,7 +7,8 @@ namespace SalesAppAPI.Models
     {
         [Key]
         [Required]
-        public string CatalogId { get; set; }
+        public int CatalogId { get; set; }
+        public string CatalogCode { get; set; }
         public string CatalogName { get; set; }
         public virtual List<Product> ProductList { get; set; }
     }

@@ -6,7 +6,8 @@ namespace SalesAppAPI.DTOs
 {
     public class CatalogDTO
     {
-        public string CatalogId { get; set; }
+        public int CatalogId { get; set; }
+        public string CatalogCode { get; set; }
         public string CatalogName { get; set; }
         public List<Product> ProductList { get; set; }
     }

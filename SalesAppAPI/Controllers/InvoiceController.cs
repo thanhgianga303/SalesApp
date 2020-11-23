@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(InvoicesDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<InvoiceDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<InvoiceDTO>>> GetBy(int id)
         {
             var Invoice = await _unitOfWork.Invoices.GetBy(id);
             var InvoiceDTO = _mapper.Map<Invoice, InvoiceDTO>(Invoice);
@@ -43,9 +43,9 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = Invoice.InvoiceId }, Invoice);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, InvoiceDTO InvoiceDTO)
+        public async Task<IActionResult> Update(int id, InvoiceDTO InvoiceDTO)
         {
-            if (InvoiceDTO.InvoiceId.ToString() != id)
+            if (InvoiceDTO.InvoiceId != id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> InvoiceExists(string id)
+        private async Task<bool> InvoiceExists(int id)
         {
             var Invoice = await _unitOfWork.Invoices.GetBy(id);
             if (Invoice != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await InvoiceExists(id))
             {

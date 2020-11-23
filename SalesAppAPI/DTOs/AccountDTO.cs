@@ -6,8 +6,8 @@ namespace SalesAppAPI.DTOs
 {
     public class AccountDTO
     {
-        public string AccountId { get; set; }
-        public string RoleId { get; set; }
+        public int AccountId { get; set; }
+        public int RoleId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public Role Role { get; set; }

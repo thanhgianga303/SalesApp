@@ -18,8 +18,9 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Account", b =>
                 {
-                    b.Property<string>("AccountId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AccountId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
@@ -27,19 +28,26 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("RoleId1")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("AccountId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId1");
 
                     b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("SalesAppAPI.Models.Catalog", b =>
                 {
-                    b.Property<string>("CatalogId")
+                    b.Property<int>("CatalogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CatalogCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CatalogName")
@@ -52,8 +60,12 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Combo", b =>
                 {
-                    b.Property<string>("ComboId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ComboId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ComboCode")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ComboName")
                         .HasColumnType("TEXT");
@@ -84,11 +96,11 @@ namespace SalesAppAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ComboId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ComboId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("ComboDetailsId");
 
@@ -101,13 +113,17 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Customer", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("AccountId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CustomerCode")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -122,8 +138,8 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("isNew")
                         .HasColumnType("INTEGER");
@@ -140,14 +156,18 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.DeliveryNote", b =>
                 {
-                    b.Property<string>("DeliveryNoteId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DeliveryNoteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("InvoiceId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DeliveryNoteCode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
@@ -158,8 +178,8 @@ namespace SalesAppAPI.Migrations
                     b.Property<DateTime>("ShipDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StaffId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StaffId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("DeliveryNoteId");
 
@@ -173,20 +193,24 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Invoice", b =>
                 {
-                    b.Property<string>("InvoiceId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("InvoiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerID")
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("InvoiceCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("InvoiceName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StaffID")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StaffID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("TotalMoney")
                         .HasColumnType("TEXT");
@@ -206,14 +230,14 @@ namespace SalesAppAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ComboId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("ComboId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("InvoiceId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProductId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("InvoiceDetailsId");
 
@@ -228,19 +252,23 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Product", b =>
                 {
-                    b.Property<string>("ProductId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Amount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CatalogId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CatalogId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Details")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProductName")
@@ -255,10 +283,14 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Role", b =>
                 {
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoleName")
@@ -271,11 +303,12 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Staff", b =>
                 {
-                    b.Property<string>("StaffId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StaffId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("AccountId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
@@ -292,8 +325,11 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StaffCode")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("StaffId");
 
@@ -307,8 +343,9 @@ namespace SalesAppAPI.Migrations
 
             modelBuilder.Entity("SalesAppAPI.Models.Storage", b =>
                 {
-                    b.Property<string>("StorageId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StorageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Amount")
                         .HasColumnType("INTEGER");
@@ -319,7 +356,10 @@ namespace SalesAppAPI.Migrations
                     b.Property<DateTime>("ImportDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ProductId")
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StorageCode")
                         .HasColumnType("TEXT");
 
                     b.HasKey("StorageId");
@@ -333,7 +373,7 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId1");
 
                     b.Navigation("Role");
                 });
@@ -342,11 +382,15 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Combo", "Combo")
                         .WithMany("ComboDetailsList")
-                        .HasForeignKey("ComboId");
+                        .HasForeignKey("ComboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesAppAPI.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Combo");
 
@@ -370,11 +414,15 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Invoice", "Invoice")
                         .WithOne("DeliveryNote")
-                        .HasForeignKey("SalesAppAPI.Models.DeliveryNote", "InvoiceId");
+                        .HasForeignKey("SalesAppAPI.Models.DeliveryNote", "InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesAppAPI.Models.Staff", "Staff")
                         .WithMany()
-                        .HasForeignKey("StaffId");
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Invoice");
 
@@ -385,11 +433,15 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerID");
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesAppAPI.Models.Staff", "Staff")
                         .WithMany()
-                        .HasForeignKey("StaffID");
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
@@ -404,7 +456,9 @@ namespace SalesAppAPI.Migrations
 
                     b.HasOne("SalesAppAPI.Models.Invoice", "Invoice")
                         .WithMany("InvoiceDetailsList")
-                        .HasForeignKey("InvoiceId");
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesAppAPI.Models.Product", "Product")
                         .WithMany("InvoiceDetailsList")
@@ -421,7 +475,9 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Catalog", "Catalog")
                         .WithMany("ProductList")
-                        .HasForeignKey("CatalogId");
+                        .HasForeignKey("CatalogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Catalog");
                 });
@@ -430,7 +486,9 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Account", "Account")
                         .WithOne("Staff")
-                        .HasForeignKey("SalesAppAPI.Models.Staff", "AccountId");
+                        .HasForeignKey("SalesAppAPI.Models.Staff", "AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SalesAppAPI.Models.Role", null)
                         .WithMany("StaffList")
@@ -443,7 +501,9 @@ namespace SalesAppAPI.Migrations
                 {
                     b.HasOne("SalesAppAPI.Models.Product", "Product")
                         .WithMany("StorageList")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });

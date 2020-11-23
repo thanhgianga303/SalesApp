@@ -8,9 +8,9 @@ namespace SalesAppAPI.DTOs
     public class InvoiceDetailsDTO
     {
         public int InvoiceDetailsId { get; set; }
-        public string InvoiceId { get; set; }
-        public string ComboId { get; set; } = null!;
-        public string ProductId { get; set; } = null!;
+        public int InvoiceId { get; set; }
+        public int ComboId { get; set; }
+        public int ProductId { get; set; }
         public Combo Combo { get; set; }
         public Product Product { get; set; }
         public Invoice Invoice { get; set; }

@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(CombosDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<ComboDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<ComboDTO>>> GetBy(int id)
         {
             var Combo = await _unitOfWork.Combos.GetBy(id);
             var ComboDTO = _mapper.Map<Combo, ComboDTO>(Combo);
@@ -43,9 +43,9 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = Combo.ComboId }, Combo);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, ComboDTO ComboDTO)
+        public async Task<IActionResult> Update(int id, ComboDTO ComboDTO)
         {
-            if (ComboDTO.ComboId.ToString() != id)
+            if (ComboDTO.ComboId != id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> ComboExists(string id)
+        private async Task<bool> ComboExists(int id)
         {
             var Combo = await _unitOfWork.Combos.GetBy(id);
             if (Combo != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await ComboExists(id))
             {

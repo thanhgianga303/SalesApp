@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(StoragesDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<StorageDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<StorageDTO>>> GetBy(int id)
         {
             var Storage = await _unitOfWork.Storage.GetBy(id);
             var StorageDTO = _mapper.Map<Storage, StorageDTO>(Storage);
@@ -43,9 +43,9 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = Storage.StorageId }, Storage);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, StorageDTO StorageDTO)
+        public async Task<IActionResult> Update(int id, StorageDTO StorageDTO)
         {
-            if (StorageDTO.StorageId.ToString() != id)
+            if (StorageDTO.StorageId != id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> StorageExists(string id)
+        private async Task<bool> StorageExists(int id)
         {
             var Storage = await _unitOfWork.Storage.GetBy(id);
             if (Storage != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await StorageExists(id))
             {

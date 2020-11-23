@@ -8,9 +8,10 @@ namespace SalesAppAPI.Models
     {
         [Key]
         [Required]
-        public string DeliveryNoteId { get; set; }
-        public string InvoiceId { get; set; }
-        public string StaffId { get; set; }
+        public int DeliveryNoteId { get; set; }
+        public int DeliveryNoteCode { get; set; }
+        public int InvoiceId { get; set; }
+        public int StaffId { get; set; }
         public string Address { get; set; }
         public DateTime ShipDate { get; set; }
         public decimal ShipCost { get; set; }

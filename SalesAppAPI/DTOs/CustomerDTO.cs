@@ -6,7 +6,8 @@ namespace SalesAppAPI.DTOs
 {
     public class CustomerDTO : People
     {
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
+        public string CustomerCode { get; set; }
         public bool isNew { get; set; }
         public string AccountId { get; set; }
         public Account Account { get; set; }

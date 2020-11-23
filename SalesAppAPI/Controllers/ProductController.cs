@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(ProductsDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetBy(string id)
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetBy(int id)
         {
             var Product = await _unitOfWork.Products.GetBy(id);
             var ProductDTO = _mapper.Map<Product, ProductDTO>(Product);
@@ -43,9 +43,9 @@ namespace SalesAppAPI.Controller
             return CreatedAtAction(nameof(GetBy), new { id = Product.ProductId }, Product);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, ProductDTO ProductDTO)
+        public async Task<IActionResult> Update(int id, ProductDTO ProductDTO)
         {
-            if (ProductDTO.ProductId.ToString() != id)
+            if (ProductDTO.ProductId != id)
             {
                 return BadRequest();
             }
@@ -68,7 +68,7 @@ namespace SalesAppAPI.Controller
             }
             return NoContent();
         }
-        private async Task<bool> ProductExists(string id)
+        private async Task<bool> ProductExists(int id)
         {
             var Product = await _unitOfWork.Products.GetBy(id);
             if (Product != null)
@@ -81,7 +81,7 @@ namespace SalesAppAPI.Controller
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await ProductExists(id))
             {

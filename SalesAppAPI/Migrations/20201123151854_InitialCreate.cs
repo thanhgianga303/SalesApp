@@ -11,7 +11,9 @@ namespace SalesAppAPI.Migrations
                 name: "Catalogs",
                 columns: table => new
                 {
-                    CatalogId = table.Column<string>(type: "TEXT", nullable: false),
+                    CatalogId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CatalogCode = table.Column<string>(type: "TEXT", nullable: true),
                     CatalogName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -23,7 +25,9 @@ namespace SalesAppAPI.Migrations
                 name: "Combos",
                 columns: table => new
                 {
-                    ComboId = table.Column<string>(type: "TEXT", nullable: false),
+                    ComboId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ComboCode = table.Column<int>(type: "INTEGER", nullable: false),
                     ComboName = table.Column<string>(type: "TEXT", nullable: true),
                     StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     EndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -40,7 +44,9 @@ namespace SalesAppAPI.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoleCode = table.Column<string>(type: "TEXT", nullable: true),
                     RoleName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -53,8 +59,10 @@ namespace SalesAppAPI.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<string>(type: "TEXT", nullable: false),
-                    CatalogId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CatalogId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductCode = table.Column<string>(type: "TEXT", nullable: true),
                     ProductName = table.Column<string>(type: "TEXT", nullable: true),
                     Details = table.Column<string>(type: "TEXT", nullable: true),
                     Amount = table.Column<int>(type: "INTEGER", nullable: false),
@@ -68,24 +76,26 @@ namespace SalesAppAPI.Migrations
                         column: x => x.CatalogId,
                         principalTable: "Catalogs",
                         principalColumn: "CatalogId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
                 {
-                    AccountId = table.Column<string>(type: "TEXT", nullable: false),
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<string>(type: "TEXT", nullable: true),
                     Username = table.Column<string>(type: "TEXT", nullable: true),
-                    Password = table.Column<string>(type: "TEXT", nullable: true)
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
+                    RoleId1 = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.AccountId);
                     table.ForeignKey(
-                        name: "FK_Accounts_Roles_RoleId",
-                        column: x => x.RoleId,
+                        name: "FK_Accounts_Roles_RoleId1",
+                        column: x => x.RoleId1,
                         principalTable: "Roles",
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Restrict);
@@ -97,8 +107,8 @@ namespace SalesAppAPI.Migrations
                 {
                     ComboDetailsId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ComboId = table.Column<string>(type: "TEXT", nullable: true),
-                    ProductId = table.Column<string>(type: "TEXT", nullable: true)
+                    ComboId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,21 +118,23 @@ namespace SalesAppAPI.Migrations
                         column: x => x.ComboId,
                         principalTable: "Combos",
                         principalColumn: "ComboId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ComboDetails_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Storages",
                 columns: table => new
                 {
-                    StorageId = table.Column<string>(type: "TEXT", nullable: false),
-                    ProductId = table.Column<string>(type: "TEXT", nullable: true),
+                    StorageId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StorageCode = table.Column<string>(type: "TEXT", nullable: true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
                     Amount = table.Column<int>(type: "INTEGER", nullable: false),
                     ImportDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExportDate = table.Column<DateTime>(type: "TEXT", nullable: false)
@@ -135,17 +147,19 @@ namespace SalesAppAPI.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerId = table.Column<string>(type: "TEXT", nullable: false),
+                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CustomerCode = table.Column<string>(type: "TEXT", nullable: true),
                     isNew = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccountId = table.Column<string>(type: "TEXT", nullable: true),
-                    RoleId = table.Column<string>(type: "TEXT", nullable: true),
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: true),
+                    RoleId = table.Column<int>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IdentityCard = table.Column<string>(type: "TEXT", nullable: true),
@@ -173,9 +187,11 @@ namespace SalesAppAPI.Migrations
                 name: "Staff",
                 columns: table => new
                 {
-                    StaffId = table.Column<string>(type: "TEXT", nullable: false),
-                    AccountId = table.Column<string>(type: "TEXT", nullable: true),
-                    RoleId = table.Column<string>(type: "TEXT", nullable: true),
+                    StaffId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StaffCode = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RoleId = table.Column<int>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IdentityCard = table.Column<string>(type: "TEXT", nullable: true),
@@ -190,7 +206,7 @@ namespace SalesAppAPI.Migrations
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "AccountId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Staff_Roles_RoleId",
                         column: x => x.RoleId,
@@ -203,9 +219,11 @@ namespace SalesAppAPI.Migrations
                 name: "Invoices",
                 columns: table => new
                 {
-                    InvoiceId = table.Column<string>(type: "TEXT", nullable: false),
-                    CustomerID = table.Column<string>(type: "TEXT", nullable: true),
-                    StaffID = table.Column<string>(type: "TEXT", nullable: true),
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CustomerID = table.Column<int>(type: "INTEGER", nullable: false),
+                    StaffID = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceCode = table.Column<string>(type: "TEXT", nullable: true),
                     InvoiceName = table.Column<string>(type: "TEXT", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     TotalMoney = table.Column<decimal>(type: "TEXT", nullable: false)
@@ -218,22 +236,24 @@ namespace SalesAppAPI.Migrations
                         column: x => x.CustomerID,
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Invoices_Staff_StaffID",
                         column: x => x.StaffID,
                         principalTable: "Staff",
                         principalColumn: "StaffId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "DeliveryNotes",
                 columns: table => new
                 {
-                    DeliveryNoteId = table.Column<string>(type: "TEXT", nullable: false),
-                    InvoiceId = table.Column<string>(type: "TEXT", nullable: true),
-                    StaffId = table.Column<string>(type: "TEXT", nullable: true),
+                    DeliveryNoteId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DeliveryNoteCode = table.Column<int>(type: "INTEGER", nullable: false),
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    StaffId = table.Column<int>(type: "INTEGER", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     ShipDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ShipCost = table.Column<decimal>(type: "TEXT", nullable: false),
@@ -247,13 +267,13 @@ namespace SalesAppAPI.Migrations
                         column: x => x.InvoiceId,
                         principalTable: "Invoices",
                         principalColumn: "InvoiceId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DeliveryNotes_Staff_StaffId",
                         column: x => x.StaffId,
                         principalTable: "Staff",
                         principalColumn: "StaffId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -262,9 +282,9 @@ namespace SalesAppAPI.Migrations
                 {
                     InvoiceDetailsId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    InvoiceId = table.Column<string>(type: "TEXT", nullable: true),
-                    ComboId = table.Column<string>(type: "TEXT", nullable: true),
-                    ProductId = table.Column<string>(type: "TEXT", nullable: true)
+                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ComboId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -280,7 +300,7 @@ namespace SalesAppAPI.Migrations
                         column: x => x.InvoiceId,
                         principalTable: "Invoices",
                         principalColumn: "InvoiceId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_InvoiceDetails_Products_ProductId",
                         column: x => x.ProductId,
@@ -290,9 +310,9 @@ namespace SalesAppAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_RoleId",
+                name: "IX_Accounts_RoleId1",
                 table: "Accounts",
-                column: "RoleId");
+                column: "RoleId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ComboDetails_ComboId",

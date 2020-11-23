@@ -6,8 +6,9 @@ namespace SalesAppAPI.DTOs
 {
     public class StaffDTO : People
     {
-        public string StaffId { get; set; }
-        public string AccountId { get; set; }
+        public int StaffId { get; set; }
+        public int AccountId { get; set; }
+        public string StaffCode { get; set; }
         public Account Account { get; set; }
     }
 }
