@@ -9,7 +9,7 @@ using SalesAppAPI.Data;
 namespace SalesAppAPI.Migrations
 {
     [DbContext(typeof(SalesAppContext))]
-    [Migration("20201123142600_InitialCreate")]
+    [Migration("20201123144612_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,16 +121,10 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("isNew")
@@ -297,16 +291,10 @@ namespace SalesAppAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
                     b.HasKey("StaffId");
