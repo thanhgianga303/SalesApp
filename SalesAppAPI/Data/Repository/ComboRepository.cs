@@ -15,5 +15,12 @@ namespace SalesAppAPI.Data.Repository
         {
             _context = context;
         }
+        public async Task UpdateComboDetails(int comboId, List<ComboDetails> newListComboDetails)
+        {
+            var listComboDetails = _context.ComboDetails.Where(c => c.ComboId == comboId);
+            _context.ComboDetails.RemoveRange(listComboDetails);
+            await _context.ComboDetails.AddRangeAsync(newListComboDetails);
+            await _context.SaveChangesAsync();
+        }
     }
 }
