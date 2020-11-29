@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(CombosDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<ComboDTO>>> GetBy(int id)
+        public async Task<ActionResult<ComboDTO>> GetBy(int id)
         {
             var Combo = await _unitOfWork.Combos.GetBy(id);
             var ComboDTO = _mapper.Map<Combo, ComboDTO>(Combo);

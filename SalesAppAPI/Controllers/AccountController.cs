@@ -29,7 +29,7 @@ namespace SalesAppAPI.Controller
             return Ok(accountsDTO);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<AccountDTO>>> GetBy(int id)
+        public async Task<ActionResult<AccountDTO>> GetBy(int id)
         {
             var account = await _unitOfWork.Accounts.GetBy(id);
             var accountDTO = _mapper.Map<Account, AccountDTO>(account);
